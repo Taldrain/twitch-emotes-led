@@ -1,0 +1,19 @@
+{
+  "name": "twitch-emotes-led",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "author": "taldrain",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@kararty/dank-twitch-irc": "6.0.0",
+    "sharp": "0.32.6"
+  },
+  "devDependencies": {
+    "@types/node": "20.10.0",
+    "tsx": "4.5.0",
+    "typescript": "5.3.2"
+  }
+}
