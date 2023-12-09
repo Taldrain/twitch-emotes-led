@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { tmpdir } from 'node:os'
-import { writeFile, access, constants } from 'node:fs/promises';
+import { writeFile, mkdir, access, constants } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { xdgCache } from 'xdg-basedir';
 
@@ -9,6 +9,10 @@ import { fetchBuffer } from './utils/fetch.ts';
 
 class EmotesCache {
   private folder = join(xdgCache || tmpdir(), 'twitch-emotes-led');
+
+  public async init() {
+    return mkdir(this.folder, { recursive: true });
+  }
 
   private async saveEmote(emote: EmoteMsg, filepath: string) {
     const buffer = await fetchBuffer(emote.url);
@@ -33,7 +37,8 @@ class EmotesCache {
   public async getEmotePath(emote: EmoteMsg): Promise<string> {
     const filename = this.getFilename(emote);
     const filepath = join(this.folder, filename);
-    if (!this.localFileExists(filepath)) {
+    const fileExists = await this.localFileExists(filepath);
+    if (!fileExists) {
       await this.saveEmote(emote, filepath);
     }
 

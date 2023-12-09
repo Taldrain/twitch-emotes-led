@@ -9,7 +9,7 @@ program
   .option('--gpio-mapping <value>', 'gpio mapping')
   .addOption(new Option('--brightness <value>', 'brightness').argParser(v => parseInt(v, 10)))
   .option('--pixel-mapper <value>', 'pixel mapper')
-  .requiredOption('-c, --channel', 'Twitch channel')
+  .requiredOption('-c, --channel <value>', 'Twitch channel')
 
 program.parse(process.argv);
 const options = program.opts();

@@ -35,6 +35,8 @@ class TwitchEmotesLed {
   }
 
   async connect(channel: string) {
+    await this.emotesCache.init();
+
     console.log(`Connecting to ${channel}...`);
     const channelId = await twitchChat.join(channel);
 
@@ -127,7 +129,7 @@ class TwitchEmotesLed {
     }
     this.childProcess = spawn(this.ledImageViewerPath, [
       `--led-gpio-mapping=${this.ledConfig.ledMapping}`,
-      `--led-pixel-mapper=${this.ledConfig.ledPixelMapper}}`,
+      `--led-pixel-mapper=${this.ledConfig.ledPixelMapper}`,
       `--led-brightness=${this.ledConfig.ledBrightness}`,
       emoteFilePath,
     ]);
