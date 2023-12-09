@@ -1,5 +1,5 @@
-import { fetchJson } from "../utils/fetch";
-import EmotesProvider, { Emote, EmotesSet } from "./emotes-provider";
+import { fetchJson } from '../utils/fetch.ts';
+import EmotesProvider, { Emote, EmotesSet } from './emotes-provider.ts';
 
 const BASE_URL = 'https://api.frankerfacez.com/v1';
 const CHANNEL_URL = `${BASE_URL}/room`;

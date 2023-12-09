@@ -1,20 +1,41 @@
-import { EmoteMsg, EmotesSet } from './emotes-providers/emotes-provider';
-import BTTV from './emotes-providers/bttv';
-import FFZ from './emotes-providers/ffz';
-import Twitch from './emotes-providers/twitch';
-import twitchChat from './twitch-chat';
+import { ChildProcess, spawn } from 'node:child_process';
 import { PrivmsgMessage } from '@kararty/dank-twitch-irc';
-import SevenTV from './emotes-providers/seventv';
+
+import { EmoteMsg, EmotesSet } from './emotes-providers/emotes-provider.ts';
+import BTTV from './emotes-providers/bttv.ts';
+import FFZ from './emotes-providers/ffz.ts';
+import Twitch from './emotes-providers/twitch.ts';
+import twitchChat from './twitch-chat.ts';
+import SevenTV from './emotes-providers/seventv.ts';
+import EmotesCache from './emotes-cache.ts';
 
 class TwitchEmotesLed {
   private emotesSets: EmotesSet[] = [];
   private msgs: PrivmsgMessage[] = [];
+  private emotesCache = new EmotesCache();
+  private previousEmote: EmoteMsg | null = null;
+  private childProcess: ChildProcess | null = null;
+  private ledImageViewerPath: string;
+  private ledConfig;
 
-  constructor() {
-    setInterval(() => this.processMsgs(), 3000)
+  constructor(
+    ledImageViewerPath: string,
+    ledBrightness: number = 50,
+    ledMapping: string = 'adafruit-hat',
+    ledPixelMapper: string = 'Rotate:180',
+  ) {
+    this.ledImageViewerPath = ledImageViewerPath;
+    this.ledConfig = {
+      ledBrightness,
+      ledMapping,
+      ledPixelMapper,
+    };
+
+    setInterval(() => this.processMsgs(), 1000)
   }
 
   async connect(channel: string) {
+    console.log(`Connecting to ${channel}...`);
     const channelId = await twitchChat.join(channel);
 
     const BTTVProvider = new BTTV(channelId, channel);
@@ -34,7 +55,7 @@ class TwitchEmotesLed {
     twitchChat.onMsg((msg: PrivmsgMessage) => this.msgs.push(msg));
   }
 
-  async processMsgs() {
+  private async processMsgs() {
     const msgs = [...this.msgs];
     this.msgs = [];
 
@@ -90,7 +111,28 @@ class TwitchEmotesLed {
       return acc;
     });
 
-    console.log({ mostUsedEmote });
+    this.display(mostUsedEmote);
+  }
+
+  private async display(emote: EmoteMsg) {
+    console.log(`displaying emote: ${emote.code} [${emote.counter}]`);
+
+    if (this.previousEmote && emote.code === this.previousEmote.code) {
+      return;
+    }
+
+    const emoteFilePath = await this.emotesCache.getEmotePath(emote);
+    if (this.childProcess) {
+      this.childProcess.kill('SIGINT');
+    }
+    this.childProcess = spawn(this.ledImageViewerPath, [
+      `--led-gpio-mapping=${this.ledConfig.ledMapping}`,
+      `--led-pixel-mapper=${this.ledConfig.ledPixelMapper}}`,
+      `--led-brightness=${this.ledConfig.ledBrightness}`,
+      emoteFilePath,
+    ]);
+
+    this.previousEmote = emote;
   }
 }
 

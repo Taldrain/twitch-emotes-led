@@ -1,5 +1,6 @@
-import { PrivmsgMessage, TwitchEmote } from "@kararty/dank-twitch-irc";
-import EmotesProvider, { Emote, EmoteMsg, EmotesSet } from "./emotes-provider";
+import { PrivmsgMessage, TwitchEmote } from '@kararty/dank-twitch-irc';
+
+import EmotesProvider, { Emote, EmoteMsg, EmotesSet } from './emotes-provider.ts';
 
 const EMOTE_URL = 'https://static-cdn.jtvnw.net/emoticons/v1';
 

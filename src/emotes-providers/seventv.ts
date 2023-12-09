@@ -1,5 +1,5 @@
-import { fetchJson } from "../utils/fetch";
-import EmotesProvider, { Emote, EmotesSet } from "./emotes-provider";
+import { fetchJson } from '../utils/fetch.ts';
+import EmotesProvider, { Emote, EmotesSet } from './emotes-provider.ts';
 
 const BASE_URL = 'https://7tv.io/v3';
 const EMOTE_SETS_URL = `${BASE_URL}/emote-sets`;

@@ -1,19 +1,22 @@
 {
   "name": "twitch-emotes-led",
   "version": "1.0.0",
-  "description": "",
+  "description": "Display twitch emotes on a led matrix",
+  "type": "module",
   "main": "src/index.ts",
   "author": "taldrain",
   "scripts": {
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@kararty/dank-twitch-irc": "6.0.0",
-    "sharp": "0.32.6"
+    "@kararty/dank-twitch-irc": "6.2.0",
+    "commander": "11.1.0",
+    "xdg-basedir": "5.1.0"
   },
   "devDependencies": {
-    "@types/node": "20.10.0",
-    "tsx": "4.5.0",
-    "typescript": "5.3.2"
+    "@types/node": "20.10.4",
+    "tsx": "4.6.2",
+    "typescript": "5.3.3"
   }
 }
