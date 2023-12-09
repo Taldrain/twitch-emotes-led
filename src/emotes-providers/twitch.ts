@@ -2,7 +2,7 @@ import { PrivmsgMessage, TwitchEmote } from '@kararty/dank-twitch-irc';
 
 import EmotesProvider, { Emote, EmoteMsg, EmotesSet } from './emotes-provider.ts';
 
-const EMOTE_URL = 'https://static-cdn.jtvnw.net/emoticons/v1';
+const EMOTE_URL = 'https://static-cdn.jtvnw.net/emoticons/v2';
 
 function convertEmote(emote: TwitchEmote): Emote {
   return ({
@@ -10,7 +10,7 @@ function convertEmote(emote: TwitchEmote): Emote {
     code: emote.code,
     animated: false,
     provider: 'twitch',
-    url: `${EMOTE_URL}/${emote.id}/3.0`,
+    url: `${EMOTE_URL}/${emote.id}/default/dark/3.0`,
   });
 }
 
