@@ -11,6 +11,8 @@ display this emotes on the connected RGB matrix.
 - Zero-width emotes are skipped
 - Support animated emotes
 
+![demo](./assets/demo.webm)
+
 ## Setup
 
 Using a compatible LED matrix, clone the repository and install the
@@ -31,8 +33,9 @@ Other options are available, see `npx tsx src/index -h`.
 ## Cache
 
 When running, emotes will be cached to `$XDG_CACHE_HOME/twitch-emotes-led`,
-resolving by default to `.cache/twitch-emotes-led/`. You can delete the folder
-if needed.
+resolving by default to `~/.cache/twitch-emotes-led/`. You can delete the folder
+if needed. Since the project is likely to be run as root, it will use the home
+of the root user.
 
 ## Hardware
 
