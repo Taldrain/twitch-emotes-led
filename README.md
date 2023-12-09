@@ -39,5 +39,5 @@ of the root user.
 
 ## Hardware
 
-- [https://www.adafruit.com/product/607](Adafruit 32x32 RGB matrix)
-- [https://learn.adafruit.com/adafruit-rgb-matrix-plus-real-time-clock-hat-for-raspberry-pi](Adafruit RGB matrix documentation)
+- [Adafruit 32x32 RGB matrix](https://www.adafruit.com/product/607)
+- [Adafruit RGB matrix documentation](https://learn.adafruit.com/adafruit-rgb-matrix-plus-real-time-clock-hat-for-raspberry-pi)
