@@ -11,7 +11,7 @@ display this emotes on the connected RGB matrix.
 - Zero-width emotes are skipped
 - Support animated emotes
 
-![demo](./assets/demo.webm)
+[demo.webm](https://github.com/Taldrain/twitch-emotes-led/assets/1081600/5bf528ed-3e51-4e3b-b1a4-abd593837717)
 
 ## Setup
 
