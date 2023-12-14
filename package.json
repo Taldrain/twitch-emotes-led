@@ -1,6 +1,6 @@
 {
   "name": "twitch-emotes-led",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Display twitch emotes on a led matrix",
   "type": "module",
   "main": "src/index.ts",

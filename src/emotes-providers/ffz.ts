@@ -51,7 +51,7 @@ class FFZ extends EmotesProvider {
       code: emote.name,
       animated: false,
       provider: 'ffz',
-      url: `https:${emote.urls[4]}`,
+      url: emote.urls[4],
     });
   }
 }
